@@ -2,14 +2,17 @@ import cv2,os,time
 # generate ascii version of bad apple in real time
 video_path = r'.\data\【東方】Bad Apple!! ＰＶ【影絵】.mp4'
 cap = cv2.VideoCapture(video_path)
-success, image = cap.read()
-count = 0
+success, image = cap.read() #get frame
 row = ''
 size = [36,22]
+time_offset = 0.001
+last_frame_time = 0
 while success:
   resizedImage = cv2.resize(image,(size[1],size[0])) #resize frame to fit command line
+  if time.time()-last_frame_time < 0.03:
+    time.sleep(0.03-(time.time()-last_frame_time))
+  last_frame_time = time.time()
   os.system('cls')
-  count += 1
   for x in range(0,size[0]-1):
     print(row)
     row = ''
@@ -19,8 +22,10 @@ while success:
         row += '     '
       elif v[0] == 255:
         row += '#####'
+      elif v[0] < 128:
+        row += ' ... '
       else:
         row += '+++++'
-  success, image = cap.read()
+  success, image = cap.read() #get frame
 cap.release()
 cv2.destroyAllWindows()
