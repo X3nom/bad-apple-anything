@@ -29,7 +29,7 @@ while success:
     time.sleep(0.03-time_between_frames) # wait if frame rate is higher than 30fps
   last_frame_time = time.time()
   #os.system('cls')
-  print(frame+'\n')
+  print(frame)
   for i in range(frame_rate_divisor):
     success, image = cap.read() #get frame
 cap.release()
