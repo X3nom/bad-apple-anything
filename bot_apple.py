@@ -1,6 +1,6 @@
 import cv2,os,time,discord
 
-token = 'enter token'
+token = 'bot token'
 client = discord.Client()
 
 @client.event
@@ -8,9 +8,9 @@ async def on_ready():
     print("logged in")
 @client.event
 async def on_message(message):
-    if message.content == 'bad apple':
-        await message.channel.send('BadApple')
-    if message.content == 'BadApple':
+    if message.content == 'bad apple': # start by sending 'bad apple' to discord channel
+        await message.channel.send('BadApple') # sends it's own message
+    if message.content == 'BadApple' and message.author == client.user : # if message is it's own then start playing
         # generate ascii version of bad apple in real time
         # Works best with VScode terminal
         video_path = r'.\data\【東方】Bad Apple!! ＰＶ【影絵】.mp4'
