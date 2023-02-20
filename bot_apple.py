@@ -1,6 +1,7 @@
 import cv2,os,time,discord
 
-token = 'bot token'
+token = 'bot token' #set token!
+
 client = discord.Client()
 
 @client.event
@@ -12,7 +13,6 @@ async def on_message(message):
         await message.channel.send('BadApple') # sends it's own message
     if message.content == 'BadApple' and message.author == client.user : # if message is it's own then start playing
         # generate ascii version of bad apple in real time
-        # Works best with VScode terminal
         video_path = r'.\data\【東方】Bad Apple!! ＰＶ【影絵】.mp4'
         cap = cv2.VideoCapture(video_path)
         success, image = cap.read() #get frame
