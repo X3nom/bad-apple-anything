@@ -18,7 +18,7 @@ async def on_message(message):
         success, image = cap.read() #get frame
         count = 0
         size = [13,20] #set size
-        frame_rate_divisor = 6 # set to 2 or more if video runs too slow, scales down framerate
+        frame_rate_divisor = 29 # set to 2 or more if video runs too slow, scales down framerate
         time_offset = 0.001
         last_frame_time = 0
         while success:
@@ -38,10 +38,10 @@ async def on_message(message):
                   frame += '..'
                 else:
                   frame += '++'
-            #time_between_frames = time.time()-last_frame_time
-            #if time_between_frames < 0.03:
-            #  time.sleep(0.03-time_between_frames) # wait if frame rate is higher than 30fps
-            #last_frame_time = time.time()
+            time_between_frames = time.time()-last_frame_time
+            if time_between_frames < 1:
+              time.sleep(1-time_between_frames) # wait if frame rate is higher than 1fps (the best discord message edit rate can do)
+            last_frame_time = time.time()
             await message.edit(content='`'+frame+'`')
             for i in range(frame_rate_divisor):
               success, image = cap.read() #get frame
