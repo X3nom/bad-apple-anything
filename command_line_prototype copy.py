@@ -1,13 +1,15 @@
 import cv2,os,time
 # webcam to ascii
 # Works best with VScode terminal
-characters = "  ´-.~*=+</?0#$@"
+characters = r"  `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"
 #characters = characters[::-1]
+
 video_path = 0#r'.\data\【東方】Bad Apple!! ＰＶ【影絵】.mp4'
+
 cap = cv2.VideoCapture(video_path)
 success, image = cap.read() #get frame
 row = ''
-size = [30,120] #set size
+size = [60,240] #set size
 frame_rate_divisor = 1 # set to 2 or more if video runs too slow, scales down framerate
 time_offset = 0.001
 last_frame_time = 0
@@ -27,6 +29,8 @@ while success:
   last_frame_time = time.time()
   os.system('cls')
   print(frame)
+  cv2.imshow("oo",image)
+  cv2.waitKey(1)
   for i in range(frame_rate_divisor):
     success, image = cap.read() #get frame
 cap.release()
